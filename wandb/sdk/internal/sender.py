@@ -381,7 +381,7 @@ class SendManager(object):
         )
 
         if not resume_status:
-            if self._settings.resume == "must":
+            if self._settings.resume == "must":         # @@@ check for resume??
                 error = wandb_internal_pb2.ErrorInfo()
                 error.code = wandb_internal_pb2.ErrorInfo.ErrorCode.INVALID
                 error.message = "resume='must' but run (%s) doesn't exist" % run.run_id
@@ -530,11 +530,14 @@ class SendManager(object):
             self._config_save(config_value_dict)
 
         if is_wandb_init:
+            print(f'@@@@@@@@ wandb init sendmanager {run.run_id} {run.resumed}')
+
+
             # Ensure we have a project to query for status
             if run.project == "":
                 run.project = util.auto_project_name(self._settings.program)
             # Only check resume status on `wandb.init`
-            error = self._maybe_setup_resume(run)
+            error = self._maybe_setup_resume(run)       # @@@ setup resume
 
         if error is not None:
             if data.control.req_resp:
@@ -580,7 +583,7 @@ class SendManager(object):
         else:
             logger.info("updated run: %s", self._run.run_id)
 
-    def _init_run(self, run, config_dict):
+    def _init_run(self, run, config_dict):      # @@@ send manager init run
         # We subtract the previous runs runtime when resuming
         start_time = run.start_time.ToSeconds() - self._resume_state["runtime"]
         repo = GitRepo(remote=self._settings.git_remote)
