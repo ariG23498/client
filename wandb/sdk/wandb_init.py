@@ -429,7 +429,7 @@ class _WandbInit(object):
         # resuming needs access to the server, check server_status()?
 
         print(f'@@@@@@@ config {config}')
-        print(f'@@@@@@@ settings {s}')
+        print(f'@@@@@@@ settings __dict__ {s.__dict__}')
         run = Run(config=config, settings=s, sweep_config=sweep_config)     # @@@ run
 
         # probe the active start method
@@ -521,7 +521,7 @@ class _WandbInit(object):
                 logger.info("run resumed")
                 with telemetry.context(run=run) as tel:
                     tel.feature.resumed = True
-            run._set_run_obj(ret.run)       # @@@ getting run obj
+            run._set_run_obj(ret.run)       # @@@ pull run obj
 
         logger.info("starting run threads in backend")
         # initiate run (stats and metadata probing)

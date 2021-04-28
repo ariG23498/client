@@ -821,10 +821,6 @@ class Settings(object):
                 self.__override_dict[k] = _override
                 self.__override_dict_set.setdefault(k, set()).add(_override)
 
-        print(f'@@@ dict {self.__dict__}')
-        print(f'@@@ defaults {self.__defaults_dict}')
-        print(f'@@@ override {self.__override_dict}')
-
     def update(self, __d: Dict = None, **kwargs: Any) -> None:
         _source = kwargs.pop("_source", None)
         _override = kwargs.pop("_override", None)
@@ -1051,9 +1047,7 @@ class Settings(object):
         print(f'@@@@@@ args before = {args}')
 
 
-        args = {param_map.get(k, k): v for k, v in six.iteritems(args) if v is not None}        # @@@ lmao what he fuck
-
-        print(f'@@@@@@ args after = {args}')
+        args = {param_map.get(k, k): v for k, v in six.iteritems(args) if v is not None}
         # fun logic to convert the resume init arg
         if args.get("resume") is not None:
             if isinstance(args["resume"], six.string_types):
@@ -1064,6 +1058,8 @@ class Settings(object):
                     args["resume"] = "allow"
             elif args["resume"] is True:
                 args["resume"] = "auto"
+
+        print(f'@@@@@@ init args = {args}')
 
         # update settings
         self._update(args, _source=self.Source.INIT)

@@ -861,7 +861,7 @@ class Run(object):
     def _set_teardown_hooks(self, hooks: List[Callable[[], None]]) -> None:
         self._teardown_hooks = hooks
 
-    def _set_run_obj(self, run_obj: RunRecord) -> None:
+    def _set_run_obj(self, run_obj: RunRecord) -> None:         # @@@ set run obj
         self._run_obj = run_obj
         self._entity = run_obj.entity
         self._project = run_obj.project
