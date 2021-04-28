@@ -20,10 +20,13 @@ def parse_sm_resources():
     run_dict = dict()
     env_dict = dict()
     run_id = os.getenv("TRAINING_JOB_NAME")
+    import pprint
+    pp = pprint.PrettyPrinter
+    pp.pprint(os.environ)
     print(f'@@@@@@ TRAINING_JOB_NAME = {run_id}')
     if run_id:
-        run_dict["run_id"] = "-".join(
-            [run_id, os.getenv("CURRENT_HOST", socket.gethostname())]       # @@@ run_id: TRAINING_JOB_NAME (but original setup dict is keyed id not run_id)
+        run_dict["run_id"] = "-".join(       # @@@ we could probably just change to sagemaker_run_id
+            [run_id, os.getenv("CURRENT_HOST", socket.gethostname())]       # @@@ run_id: TRAINING_JOB_NAME from env
         )
     conf = json.load(open(sm_files.SM_RESOURCE_CONFIG))
     if len(conf["hosts"]) > 1:

@@ -98,6 +98,7 @@ class _WandbInit(object):
         if sm_config:
             sm_api_key = sm_config.get("wandb_api_key", None)
             sm_run, sm_env = sagemaker.parse_sm_resources()         # @@@ sm parse
+            print(f'@@@@@ sm_env {sm_env}')
             if sm_env:
                 if sm_api_key:
                     sm_env["WANDB_API_KEY"] = sm_api_key
