@@ -606,7 +606,7 @@ class SendManager(object):
             commit=repo.last_commit,
         )
         self._run = run
-        if self._resume_state.get("resumed"):
+        if self._resume_state.get("resumed"):       # @@@ resume state
             self._run.resumed = True
         self._run.starting_step = self._resume_state["step"]
         self._run.start_time.FromSeconds(int(start_time))

@@ -429,7 +429,10 @@ class _WandbInit(object):
         # resuming needs access to the server, check server_status()?
 
         print(f'@@@@@@@ config {config}')
-        print(f'@@@@@@@ settings __dict__ {s.__dict__}')
+        import pprint
+        pp = pprint.PrettyPrinter()
+        pp.pprint(s.__dict__)
+        # print(f'@@@@@@@ settings __dict__ {s.__dict__}')
         run = Run(config=config, settings=s, sweep_config=sweep_config)     # @@@ run
 
         # probe the active start method
