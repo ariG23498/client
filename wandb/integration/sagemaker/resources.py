@@ -20,9 +20,7 @@ def parse_sm_resources():
     run_dict = dict()
     env_dict = dict()
     run_id = os.getenv("TRAINING_JOB_NAME")
-    import pprint
-    pp = pprint.PrettyPrinter
-    pp.pprint(os.environ)
+    print(os.environ)
     print(f'@@@@@@ TRAINING_JOB_NAME = {run_id}')
     if run_id:
         run_dict["run_id"] = "-".join(       # @@@ we could probably just change to sagemaker_run_id
